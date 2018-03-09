@@ -36,7 +36,6 @@ class MachinaServiceProvider extends ServiceProvider {
     public function boot()
     {
         $this->registerAuthProviders();
-        $this->configureJwtPackage();
 
         $this->mapRoutes(
             $this->app->make('config')->get('machina.route-prefix')
@@ -54,18 +53,6 @@ class MachinaServiceProvider extends ServiceProvider {
             $this->commands($this->commands);
         }
 
-    }
-
-    /**
-     * Set opinationated default to Jwt package
-     * 
-     * @return void
-     */
-    protected function configureJwtPackage()
-    {
-        $this->app->singleton('tymon.jwt.provider.user', function ($app) {
-            return $app->make(JwtUserAdapter::class);
-        });
     }
 
     protected function mapRoutes(string $prefix)
