@@ -16,7 +16,7 @@ class AuthenticationTest extends MachinaTestCase
     }
 
     /** @test */
-    public function client_can_access_a_protected_route_with_a_valid_token_in_url()
+    function client_can_access_a_protected_route_with_a_valid_token_in_header()
     {
         $client = $this->createClient("1234");
         $data = [
@@ -35,14 +35,33 @@ class AuthenticationTest extends MachinaTestCase
     }
 
     /** @test */
-    public function accessing_a_protected_route_without_a_token_returns_400()
+    function client_can_access_a_protected_route_with_a_valid_token_in_url()
+    {
+        $client = $this->createClient("1234");
+        $data = [
+            'client' => $client->id,
+            'secret' => "1234",
+        ];
+        $response = $this->json('post', '/auth/login', $data);
+        $response->assertStatus(200);
+        $token = $response->decodeResponseJson()['access_token'];
+
+        $headers = [
+            'authorization' => 'Bearer' . $token,
+        ];
+        $response = $this->json('get', '/protected?token='.$token);
+        $response->assertStatus(200);
+    }
+
+    /** @test */
+    function accessing_a_protected_route_without_a_token_returns_400()
     {
         $response = $this->json('get', '/protected');
         $response->assertStatus(400);
     }
 
     /** @test */
-    public function accessing_a_protected_route_with_an_invalid_token_returns_401()
+    function accessing_a_protected_route_with_an_invalid_token_returns_401()
     {
         $headers = [
             'authorization' => 'Bearer1234',
@@ -52,7 +71,7 @@ class AuthenticationTest extends MachinaTestCase
     }
 
     /** @test */
-    public function user_is_authenticated_when_a_protected_route_is_accessed()
+    function user_is_authenticated_when_a_protected_route_is_accessed()
     {
         $client = $this->createClient("1234");
         $data = [

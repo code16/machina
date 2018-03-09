@@ -7,7 +7,7 @@ use Code16\Machina\Tests\MachinaTestCase;
 class LoginTest extends MachinaTestCase
 {
     /** @test */
-    public function login_with_valid_credentials_returns_a_jwt_token()
+    function login_with_valid_credentials_returns_a_jwt_token()
     {
         $client = $this->createClient("1234");
         $data = [
@@ -19,7 +19,7 @@ class LoginTest extends MachinaTestCase
     }
 
     /** @test */
-    public function login_with_invalid_credentials_returns_a_401()
+    function login_with_invalid_credentials_returns_a_401()
     {
         $client = $this->createClient("1234");
         $data = [
@@ -31,7 +31,7 @@ class LoginTest extends MachinaTestCase
     }    
 
     /** @test */
-    public function login_with_no_credentials_parameters_returns_a_401()
+    function login_with_no_credentials_parameters_returns_a_401()
     {
         $client = $this->createClient("1234");
         $data = [

@@ -230,6 +230,18 @@ class MachinaGuard implements GuardContract
     }
     
     /**
+     * Refresh current token & send it back
+     * 
+     * @return string
+     */
+    public function refresh()
+    {
+        $token = $this->getTokenFromRequest(request());
+
+        return $this->manager->refresh($token)->get();
+    }
+
+    /**
      * Get the raw Payload instance.
      *
      * @param mixed $token
@@ -241,7 +253,11 @@ class MachinaGuard implements GuardContract
         return $this->manager->decode($token);
     }
 
-
+    /**
+     * Return configured TTL
+     * 
+     * @return integer
+     */
     public function getTTL()
     {
         return $this->manager->getPayloadFactory()->getTTL();

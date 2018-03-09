@@ -25,16 +25,6 @@ class AuthController extends Controller
     }
 
     /**
-     * Return client informations
-     * 
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function index()
-    {
-        return response()->json(auth()->user());
-    }
-
-    /**
      * Login using client credentials
      *
      * @return \Illuminate\Http\JsonResponses
