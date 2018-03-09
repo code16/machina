@@ -1,6 +1,6 @@
 <?php
 
-namespace Code16\Machina\Repositories;
+namespace Code16\Machina;
 
 interface ClientRepositoryInterface
 {

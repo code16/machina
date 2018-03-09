@@ -4,7 +4,6 @@ namespace Code16\Machina;
 
 use Tymon\JWTAuth\Token;
 use Illuminate\Http\Request;
-use Code16\Machina\Repositories\ClientRepositoryInterface;
 use Tymon\JWTAuth\JWTManager;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Code16\Machina\Exceptions\MachinaJwtException;

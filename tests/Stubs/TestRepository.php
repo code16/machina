@@ -2,7 +2,7 @@
 
 namespace Code16\Machina\Tests\Stubs;
 
-use Code16\Machina\Repositories\ClientRepositoryInterface;
+use Code16\Machina\ClientRepositoryInterface;
 
 class TestRepository implements ClientRepositoryInterface
 {

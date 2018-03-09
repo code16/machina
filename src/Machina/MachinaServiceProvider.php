@@ -8,7 +8,6 @@ use Tymon\JWTAuth\JWTManager;
 use Illuminate\Support\ServiceProvider;
 use Code16\Machina\Commands\KeyCommand;
 use Code16\Machina\Adapters\JwtUserAdapter;
-use Code16\Machina\Repositories\ClientRepositoryInterface;
 
 class MachinaServiceProvider extends ServiceProvider {
 
@@ -76,9 +75,14 @@ class MachinaServiceProvider extends ServiceProvider {
     {
         $auth = $this->app->make('auth');
         $auth->extend('machina', function ($app, $name, array $config) use($auth){
+
+            $repository = array_key_exists("provider", $config)
+                ? $config['provider']
+                : ClientRepositoryInterface::class;
+
             return new MachinaGuard(
                 $app->make(JWTManager::class),
-                $app->make(ClientRepositoryInterface::class)
+                $app->make($repository)
             );
         });
     }

@@ -39,7 +39,7 @@ abstract class MachinaTestCase extends TestCase
         ]);
 
         $app->bind(
-            \Code16\Machina\Repositories\ClientRepositoryInterface::class,
+            \Code16\Machina\ClientRepositoryInterface::class,
             \Code16\Machina\Tests\Stubs\TestRepository::class
         );
     }
