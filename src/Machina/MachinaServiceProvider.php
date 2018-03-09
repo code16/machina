@@ -55,6 +55,11 @@ class MachinaServiceProvider extends ServiceProvider {
 
     }
 
+    /**
+     * Map routes for login / refresh
+     * @param  string $prefix
+     * @return void
+     */
     protected function mapRoutes(string $prefix)
     {
         $this->app->make('router')->prefix($prefix)
