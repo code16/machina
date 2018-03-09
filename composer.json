@@ -9,12 +9,6 @@
             "email": "remi@code16.fr"
         }
     ],
-    "repositories": [
-        {
-            "type" : "vcs",
-            "url": "https://github.com/code16/responder.git"
-        }
-    ],
     "require": {
         "illuminate/support": "5.5.*|5.6.*",
         "tymon/jwt-auth": "0.5.*"
