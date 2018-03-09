@@ -37,6 +37,7 @@ abstract class MachinaTestCase extends TestCase
         $app['config']->set('auth.guards.machina', [
             'driver' => 'machina',
         ]);
+        $app['config']->set('machina.route-prefix', "auth");
 
         $app->bind(
             \Code16\Machina\ClientRepositoryInterface::class,

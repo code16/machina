@@ -20,7 +20,6 @@ class AuthController extends Controller
      */
     public function __construct(AuthManager $authManager)
     {
-        $this->middleware('auth:machina', ['except' => ['create']]);
         $this->authManager = $authManager;
     }
 
@@ -39,16 +38,6 @@ class AuthController extends Controller
         }
 
         return $this->respondWithToken($token);
-    }
-
-    /**
-     * Refresh token
-     * 
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function update()
-    {
-        return $this->respondWithToken(auth()->refresh());
     }
 
     /**
