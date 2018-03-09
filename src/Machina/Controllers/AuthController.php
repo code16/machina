@@ -52,18 +52,6 @@ class AuthController extends Controller
     }
 
     /**
-     * Logout
-     * 
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function destroy()
-    {
-        auth()->logout();
-
-        return response()->json(['message' => 'Successfully logged out']);
-    }
-
-    /**
      * Get the token array structure.
      *
      * @param  string $token
