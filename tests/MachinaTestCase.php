@@ -36,11 +36,6 @@ abstract class MachinaTestCase extends TestCase
         ]);
         $app['config']->set('auth.guards.machina', [
             'driver' => 'machina',
-            'provider' => 'clients',
-        ]);
-        $app['config']->set('auth.providers.clients', [
-            'driver' => 'clients',
-            'model' => \Code16\Machina\Tests\Stubs\Client::class,
         ]);
 
         $app->bind(

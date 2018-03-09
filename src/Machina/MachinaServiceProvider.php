@@ -6,7 +6,7 @@ namespace Code16\Machina;
 use Illuminate\Http\Request;
 use Tymon\JWTAuth\JWTManager;
 use Illuminate\Support\ServiceProvider;
-use Code16\Machina\Commands\CreateClientCommand;
+use Code16\Machina\Commands\KeyCommand;
 use Code16\Machina\Adapters\JwtUserAdapter;
 use Code16\Machina\Repositories\ClientRepositoryInterface;
 
@@ -25,7 +25,7 @@ class MachinaServiceProvider extends ServiceProvider {
      * @var array
      */
     protected $commands = [
-        CreateClientCommand::class,
+        KeyCommand::class,
     ];
 
     /**
@@ -83,10 +83,6 @@ class MachinaServiceProvider extends ServiceProvider {
     protected function registerAuthProviders()
     {
         $auth = $this->app->make('auth');
-        /*$auth->provider('clients', function($app, array $config) {
-            return new ClientUserProvider();
-        });*/
-
         $auth->extend('machina', function ($app, $name, array $config) use($auth){
             return new MachinaGuard(
                 $app->make(JWTManager::class),

@@ -4,31 +4,21 @@ namespace Code16\Machina\Commands;
 
 use Illuminate\Console\Command;
 
-class InstallCommand extends Command
+class KeyCommand extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'machina:create-client';
+    protected $signature = 'machina:keys';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Create private keys';
-
-    /**
-     * Create a new command instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        //
-    }
+    protected $description = 'Generate Key used to create JWT tokens';
 
     /**
      * Execute the console command.
@@ -37,6 +27,6 @@ class InstallCommand extends Command
      */
     public function handle()
     {
-        //
+        $this->call('jwt:generate');
     }
 }
