@@ -10,7 +10,7 @@ return [
     | JWT token from the application.
     |
     */
-    'route-prefix' => 'auth',
+    'route-prefix' => 'api/auth',
 
     /*
     |--------------------------------------------------------------------------
