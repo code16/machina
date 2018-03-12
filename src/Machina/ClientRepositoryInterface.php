@@ -5,12 +5,12 @@ namespace Code16\Machina;
 interface ClientRepositoryInterface
 {
     /**
-     * Retrieve an user by its id
+     * Retrieve an user by its key
      * 
-     * @param  string $id 
+     * @param  string $key
      * @return object|null
      */
-    public function find($id);
+    public function findByKey($key);
 
     /**
      * Retrieve an user by its credentials

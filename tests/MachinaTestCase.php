@@ -11,6 +11,7 @@ abstract class MachinaTestCase extends TestCase
 {
     public function setUp()
     {
+        //$this->withoutExceptionHandling();
         parent::setUp();
         Schema::create('clients', function($table) {
             $table->increments('id');

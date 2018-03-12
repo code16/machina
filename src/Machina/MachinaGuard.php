@@ -221,7 +221,7 @@ class MachinaGuard implements GuardContract
     {
         $id = $this->getPayload($token)->get('sub');
 
-        if (! $client = $this->clientRepository->find($id)) {
+        if (! $client = $this->clientRepository->findByKey($id)) {
             return false;
         }
 
