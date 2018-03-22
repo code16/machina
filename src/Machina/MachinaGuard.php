@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 use Tymon\JWTAuth\Manager;
 use Tymon\JWTAuth\Claims\Collection as ClaimsCollection;
 use Tymon\JWTAuth\Exceptions\JWTException;
+use Tymon\JWTAuth\Exceptions\InvalidClaimException;
+use Tymon\JWTAuth\Exceptions\PayloadException;
+use Tymon\JWTAuth\Exceptions\TokenBlacklistedException;
+use Tymon\JWTAuth\Exceptions\TokenExpiredException;
+use Tymon\JWTAuth\Exceptions\TokenInvalidException;
 use Code16\Machina\Exceptions\MachinaJwtException;
 use Code16\Machina\Exceptions\MissingTokenException;
 use Illuminate\Contracts\Auth\Guard as GuardContract;
@@ -144,14 +149,26 @@ class MachinaGuard implements GuardContract
         $request = request();
 
         if (! $token = $this->getTokenFromRequest($request)) {
-            throw new MachinaJwtException(new MissingTokenException("Token not provided."));
+            throw new MachinaJwtException(new MissingTokenException("Token not provided."), 400);
         }
 
         try {
             $client = $this->getClientFromToken($token);
         } 
-        catch (JWTException $e) {
-            throw new MachinaJwtException($e);
+        catch (TokenBlacklistedException $e) {
+            throw new MachinaJwtException($e, 401);
+        }
+        catch (TokenExpiredException $e) {
+            throw new MachinaJwtException($e, 401);
+        }
+        catch (TokenInvalidException $e) {
+            throw new MachinaJwtException($e, 400);
+        }
+        catch (PayloadException$e) {
+            throw new MachinaJwtException($e, 400);
+        }
+        catch (InvalidClaimException $e) {
+            throw new MachinaJwtException($e, 400);
         }
 
         return $client ? $client : null;

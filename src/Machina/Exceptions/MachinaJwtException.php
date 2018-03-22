@@ -9,9 +9,9 @@ use Tymon\JWTAuth\Exceptions\JWTException;
  */
 class MachinaJwtException extends MachinaException
 {
-    public function __construct(JWTException $e)
+    public function __construct(JWTException $e, int $code)
     {
-        parent::__construct($e->getMessage(), $e->getStatusCode());
+        parent::__construct($e->getMessage(), $code);
     }
 
     /**

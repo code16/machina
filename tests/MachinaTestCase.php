@@ -13,7 +13,7 @@ abstract class MachinaTestCase extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $this->withoutExceptionHandling();
+        //$this->withoutExceptionHandling();
         Artisan::call('jwt:secret');
         Schema::create('clients', function($table) {
             $table->increments('id');
