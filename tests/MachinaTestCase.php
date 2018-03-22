@@ -2,6 +2,7 @@
 
 namespace Code16\Machina\Tests;
 
+use Artisan;
 use Schema;
 use Orchestra\Testbench\TestCase;
 use Code16\Machina\MachinaServiceProvider;
@@ -11,13 +12,15 @@ abstract class MachinaTestCase extends TestCase
 {
     public function setUp()
     {
-        //$this->withoutExceptionHandling();
         parent::setUp();
+        $this->withoutExceptionHandling();
+        Artisan::call('jwt:secret');
         Schema::create('clients', function($table) {
             $table->increments('id');
             $table->string('secret');
             $table->timestamps();
         });
+
     }
 
     /**

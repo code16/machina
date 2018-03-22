@@ -4,7 +4,7 @@ namespace Code16\Machina;
 
 
 use Illuminate\Http\Request;
-use Tymon\JWTAuth\JWTManager;
+use Tymon\JWTAuth\Manager;
 use Illuminate\Support\ServiceProvider;
 use Code16\Machina\Commands\KeyCommand;
 use Code16\Machina\Adapters\JwtUserAdapter;
@@ -81,7 +81,7 @@ class MachinaServiceProvider extends ServiceProvider {
                 : ClientRepositoryInterface::class;
 
             return new MachinaGuard(
-                $app->make(JWTManager::class),
+                $app->make(Manager::class),
                 $app->make($repository)
             );
         });
@@ -94,7 +94,7 @@ class MachinaServiceProvider extends ServiceProvider {
      */
     public function register()
     {   
-        $this->app->register(\Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class);
+        $this->app->register(\Tymon\JWTAuth\Providers\LaravelServiceProvider::class);
 
         $this->mergeConfigFrom(
             __DIR__.'/../config/config.php', $this->packageName

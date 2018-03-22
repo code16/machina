@@ -27,6 +27,6 @@ class KeyCommand extends Command
      */
     public function handle()
     {
-        $this->call('jwt:generate');
+        $this->call('jwt:secret');
     }
 }

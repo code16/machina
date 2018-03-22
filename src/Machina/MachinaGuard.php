@@ -4,7 +4,8 @@ namespace Code16\Machina;
 
 use Tymon\JWTAuth\Token;
 use Illuminate\Http\Request;
-use Tymon\JWTAuth\JWTManager;
+use Tymon\JWTAuth\Manager;
+use Tymon\JWTAuth\Claims\Collection as ClaimsCollection;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Code16\Machina\Exceptions\MachinaJwtException;
 use Code16\Machina\Exceptions\MissingTokenException;
@@ -22,7 +23,7 @@ class MachinaGuard implements GuardContract
     protected $clientRepository;
 
     public function __construct(
-        JWTManager $manager,
+        Manager $manager,
         ClientRepositoryInterface $clientRepository
     )
     {   
@@ -116,9 +117,9 @@ class MachinaGuard implements GuardContract
      */
     protected function makePayload($subject, array $customClaims = [])
     {
-        return $this->manager->getPayloadFactory()->make(
-            array_merge($customClaims, ['sub' => $subject])
-        );
+        $claims = array_merge($customClaims, ['sub' => $subject]);
+
+        return $this->manager->getPayloadFactory()->customClaims($claims)->make();
     }
 
     /**
