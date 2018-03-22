@@ -111,4 +111,29 @@ class AuthenticationTest extends MachinaTestCase
         $this->assertFalse(array_key_exists("authorization", $response->headers->all()));
     }
 
+    /** @test */
+    function user_is_set_after_a_successful_authentication()
+    {
+        $this->app->make('router')->get('user', function() {
+            return auth()->user();
+        })->middleware('auth:machina');
+
+        $client = $this->createClient("1234");
+        $data = [
+            'client' => $client->id,
+            'secret' => "1234",
+        ];
+        $response = $this->json('post', '/auth/login', $data);
+        $response->assertStatus(200);
+        $token = $response->decodeResponseJson()['access_token'];
+
+        $headers = [
+            'authorization' => 'Bearer' . $token,
+        ];
+        $response = $this->withHeaders($headers)->json('get', '/user');
+        $response->assertStatus(200);
+
+        $user = $response->decodeResponseJson();
+        $this->assertEquals($client->id, $user['id']);
+    }
 }
