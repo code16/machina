@@ -93,4 +93,4 @@ There is two ways of passing the token along the request :
 
 ## Implementing client applications
 
-(Link to machina-client)
+For your client applications, you can use our companion package, [machina client](https://github.com/code16/machina-client).
