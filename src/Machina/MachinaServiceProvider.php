@@ -3,16 +3,14 @@
 namespace Code16\Machina;
 
 
-use Illuminate\Http\Request;
-use Tymon\JWTAuth\Manager;
-use Illuminate\Support\ServiceProvider;
 use Code16\Machina\Commands\KeyCommand;
-use Code16\Machina\Adapters\JwtUserAdapter;
+use Illuminate\Support\ServiceProvider;
+use Tymon\JWTAuth\Manager;
 
 class MachinaServiceProvider extends ServiceProvider {
 
     /**
-     * Pachage identifier
+     * Package identifier
      * 
      * @var  string
      */
@@ -40,10 +38,8 @@ class MachinaServiceProvider extends ServiceProvider {
             $this->app->make('config')->get('machina.route-prefix')
         );
 
-        // Regiter migrations
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
 
-        // Publish your config
         $this->publishes([
             __DIR__.'/../config/config.php' => config_path($this->packageName.'.php'),
         ], 'config');
@@ -51,12 +47,12 @@ class MachinaServiceProvider extends ServiceProvider {
         if ($this->app->runningInConsole()) {
             $this->commands($this->commands);
         }
-
     }
 
     /**
      * Map routes for login / refresh
-     * @param  string $prefix
+     *
+     * @param string $prefix
      * @return void
      */
     protected function mapRoutes(string $prefix)

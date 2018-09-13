@@ -2,21 +2,20 @@
 
 namespace Code16\Machina;
 
-use Tymon\JWTAuth\Token;
+use Code16\Machina\Exceptions\MachinaJwtException;
+use Code16\Machina\Exceptions\MissingTokenException;
+use Code16\Machina\Exceptions\NotImplementedException;
+use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Contracts\Auth\Guard as GuardContract;
 use Illuminate\Http\Request;
-use Tymon\JWTAuth\Manager;
-use Tymon\JWTAuth\Claims\Collection as ClaimsCollection;
-use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Exceptions\InvalidClaimException;
+use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Exceptions\PayloadException;
 use Tymon\JWTAuth\Exceptions\TokenBlacklistedException;
 use Tymon\JWTAuth\Exceptions\TokenExpiredException;
 use Tymon\JWTAuth\Exceptions\TokenInvalidException;
-use Code16\Machina\Exceptions\MachinaJwtException;
-use Code16\Machina\Exceptions\MissingTokenException;
-use Illuminate\Contracts\Auth\Guard as GuardContract;
-use Illuminate\Contracts\Auth\Authenticatable;
-use Code16\Machina\Exceptions\NotImplementedException;
+use Tymon\JWTAuth\Manager;
+use Tymon\JWTAuth\Token;
 
 class MachinaGuard implements GuardContract
 {
@@ -131,6 +130,7 @@ class MachinaGuard implements GuardContract
      * Determine if the current user is authenticated.
      *
      * @return bool
+     * @throws MachinaJwtException
      */
     public function check()
     {
@@ -140,9 +140,9 @@ class MachinaGuard implements GuardContract
     /**
      * Get the user for the incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return mixed
+     * @throws MachinaJwtException
      */
     public function user()
     {

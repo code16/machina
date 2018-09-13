@@ -3,6 +3,9 @@
     "description": "Machine to machine authentication for Laravel",
     "keywords": ["auth", "laravel", "api", "package"],
     "homepage": "https://github.com/code16/machina",
+    "platform": {
+        "php": "7.0"
+    },
     "authors": [
         {
             "name": "Rémi Collin",

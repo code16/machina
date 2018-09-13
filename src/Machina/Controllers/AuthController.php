@@ -2,9 +2,9 @@
 
 namespace Code16\Machina\Controllers;
 
+use Illuminate\Auth\AuthManager;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Illuminate\Auth\AuthManager;
 
 class AuthController extends Controller
 {
@@ -16,7 +16,7 @@ class AuthController extends Controller
     /**
      * Create a new AuthController instance.
      *
-     * @return void
+     * @param AuthManager $authManager
      */
     public function __construct(AuthManager $authManager)
     {
@@ -26,7 +26,8 @@ class AuthController extends Controller
     /**
      * Login using client credentials
      *
-     * @return \Illuminate\Http\JsonResponses
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
      */
     public function create(Request $request)
     {

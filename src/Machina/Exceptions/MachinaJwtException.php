@@ -5,7 +5,7 @@ namespace Code16\Machina\Exceptions;
 use Tymon\JWTAuth\Exceptions\JWTException;
 
 /**
- * Wrapper around JWTexception
+ * Wrapper around JWTException
  */
 class MachinaJwtException extends MachinaException
 {
@@ -17,7 +17,7 @@ class MachinaJwtException extends MachinaException
     /**
      * Render the exception into an HTTP response.
      *
-     * @param  \Illuminate\Http\Request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function render($request)
