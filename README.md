@@ -16,9 +16,15 @@ If you want to customize some default options like the prefix used for `/login` 
     php artisan config:publish code16/machina
 ```
 
-### Using Machina as default api driver in laravel
+Then run this command, which will add a `JWT_SECRET` entry in your `.env` file:
 
-If you want to use the `machina` guard on every `api` routes from your application, change the `api` guard driver in `config/auth.php` : 
+```
+    php artisan jwt:secret
+```
+
+### Defining machine guard
+
+In `config/auth.php` : 
 
 ```php
     'guards' => [
@@ -27,16 +33,16 @@ If you want to use the `machina` guard on every `api` routes from your applicati
             'provider' => 'users',
         ],
 
-        'api' => [
+        'machina' => [
             'driver' => 'machina',
-            'provider' => App\ClientRepository::class,
+            'provider' => Api\ClientRepository::class,
         ],
     ],
 ```
 
 ### Creating a `ClientRepository` class 
 
-This package doesn't come with an opinationated way of retrieving clients, but instead provides a very simple way to adapt it to your application, by providing a class implementing `Code16\Machina\ClientRepositoryInterface`. 
+This package does not come with an opinionated way of retrieving clients, but instead provides a very simple way to adapt it to your application, by providing a class implementing `Code16\Machina\ClientRepositoryInterface`. 
 
 Example :
 
@@ -48,9 +54,9 @@ Example :
 
     class ClientRepository implements ClientRepositoryInterface
     {
-        public function find($id)
+        public function findByKey($key)
         {
-            return User::find($id);
+            return User::find($key);
         }
 
         public function findByCredentials($client, $secret)
@@ -70,7 +76,7 @@ Note that here we used the standard `App\User` model DB to identify our client, 
     Route::get('protected', 'ApiController@index')->middleware('auth:machina');
 ```
 
-## Authenticating and retriving token
+## Authenticating and retrieving token
 
 Send a POST request the `/auth/login` endpoint with `client` and `secret` as parameters : 
 

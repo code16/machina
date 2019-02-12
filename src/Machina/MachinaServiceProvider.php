@@ -69,16 +69,10 @@ class MachinaServiceProvider extends ServiceProvider {
      */
     protected function registerAuthProviders()
     {
-        $auth = $this->app->make('auth');
-        $auth->extend('machina', function ($app, $name, array $config) use($auth){
-
-            $repository = array_key_exists("provider", $config)
-                ? $config['provider']
-                : ClientRepositoryInterface::class;
-
+        auth()->extend('machina', function ($app, $name, array $config) {
             return new MachinaGuard(
                 $app->make(Manager::class),
-                $app->make($repository)
+                $app->make($config['provider'] ?? ClientRepositoryInterface::class)
             );
         });
     }
