@@ -6,7 +6,7 @@ use Code16\Machina\Tests\MachinaTestCase;
 
 class AuthenticationTest extends MachinaTestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 

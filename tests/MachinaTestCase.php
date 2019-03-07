@@ -3,14 +3,14 @@
 namespace Code16\Machina\Tests;
 
 use Artisan;
-use Schema;
-use Orchestra\Testbench\TestCase;
 use Code16\Machina\MachinaServiceProvider;
 use Code16\Machina\Tests\Stubs\Client;
+use Orchestra\Testbench\TestCase;
+use Schema;
 
 abstract class MachinaTestCase extends TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         //$this->withoutExceptionHandling();
