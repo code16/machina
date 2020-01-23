@@ -5,6 +5,7 @@ namespace Code16\Machina\Tests;
 use Artisan;
 use Code16\Machina\MachinaServiceProvider;
 use Code16\Machina\Tests\Stubs\Client;
+use Illuminate\Support\Str;
 use Orchestra\Testbench\TestCase;
 use Schema;
 
@@ -31,7 +32,7 @@ abstract class MachinaTestCase extends TestCase
      */
     protected function getEnvironmentSetUp($app)
     {       
-        $app['config']->set('app.key', str_random(32));
+        $app['config']->set('app.key', Str::random(32));
         $app['config']->set('database.default', "sqlite");
         $app['config']->set('database.connections.sqlite', [
             'driver'   => 'sqlite',
@@ -63,7 +64,7 @@ abstract class MachinaTestCase extends TestCase
     protected function createClient(string $secret = null) : Client
     {
         $client = new Client;
-        $client->secret = $secret ? $secret : str_random(32);
+        $client->secret = $secret ? $secret : Str::random(32);
         $client->save();
         return $client;
     }

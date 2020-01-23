@@ -8,6 +8,7 @@ use Code16\Machina\Exceptions\NotImplementedException;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\Guard as GuardContract;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Tymon\JWTAuth\Exceptions\InvalidClaimException;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Exceptions\PayloadException;
@@ -221,7 +222,7 @@ class MachinaGuard implements GuardContract
     {
         $header = $request->headers->get($header);
         
-        if (! starts_with(strtolower($header), $method)) {
+        if (! Str::startsWith(strtolower($header), $method)) {
             return false;
         }
 
