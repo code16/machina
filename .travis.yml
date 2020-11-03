@@ -50,8 +50,6 @@ matrix:
       env: LARAVEL='7.*' TESTBENCH='5.*' COMPOSER_FLAGS='--prefer-stable'
     - php: 7.4
       env: LARAVEL='7.*' TESTBENCH='5.*' COMPOSER_FLAGS='--prefer-stable'
-    - php: 7.2
-      env: LARAVEL='8.*' TESTBENCH='5.*' COMPOSER_FLAGS='--prefer-stable'
     - php: 7.3
       env: LARAVEL='8.*' TESTBENCH='5.*' COMPOSER_FLAGS='--prefer-stable'
     - php: 7.4
