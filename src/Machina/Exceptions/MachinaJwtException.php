@@ -2,7 +2,7 @@
 
 namespace Code16\Machina\Exceptions;
 
-use Tymon\JWTAuth\Exceptions\JWTException;
+use PHPOpenSourceSaver\JWTAuth\Exceptions\JWTException;
 
 /**
  * Wrapper around JWTException
