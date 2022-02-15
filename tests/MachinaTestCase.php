@@ -2,34 +2,26 @@
 
 namespace Code16\Machina\Tests;
 
-use Artisan;
 use Code16\Machina\MachinaServiceProvider;
 use Code16\Machina\Tests\Stubs\Client;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 use Orchestra\Testbench\TestCase;
-use Schema;
 
 abstract class MachinaTestCase extends TestCase
 {
     public function setUp(): void
     {
         parent::setUp();
-        //$this->withoutExceptionHandling();
         Artisan::call('jwt:secret');
         Schema::create('clients', function($table) {
             $table->increments('id');
             $table->string('secret');
             $table->timestamps();
         });
-
     }
 
-    /**
-     * Define environment setup.
-     *
-     * @param  \Illuminate\Foundation\Application  $app
-     * @return void
-     */
     protected function getEnvironmentSetUp($app)
     {       
         $app['config']->set('app.key', Str::random(32));

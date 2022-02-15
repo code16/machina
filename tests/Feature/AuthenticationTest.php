@@ -46,9 +46,6 @@ class AuthenticationTest extends MachinaTestCase
         $response->assertStatus(200);
         $token = $response->decodeResponseJson()['access_token'];
 
-        $headers = [
-            'authorization' => 'Bearer' . $token,
-        ];
         $response = $this->json('get', '/protected?token='.$token);
         $response->assertStatus(200);
     }

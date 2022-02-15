@@ -14,4 +14,8 @@
             <directory suffix=".php">./tests</directory>
         </testsuite>
     </testsuites>
+    <php>
+        <env name="APP_ENV" value="testing"/>
+        <env name="CACHE_DRIVER" value="file"/>
+    </php>
 </phpunit>

@@ -20,9 +20,7 @@ use PHPOpenSourceSaver\JWTAuth\Token;
 
 class MachinaGuard implements GuardContract
 {
-    /**
-     * @var \PHPOpenSourceSaver\JWTAuth\JWTManager
-     */
+    /** @var Manager */
     protected $manager;
 
     protected $clientRepository;
@@ -165,7 +163,7 @@ class MachinaGuard implements GuardContract
         catch (TokenInvalidException $e) {
             throw new MachinaJwtException($e, 400);
         }
-        catch (PayloadException$e) {
+        catch (PayloadException $e) {
             throw new MachinaJwtException($e, 400);
         }
         catch (InvalidClaimException $e) {
@@ -256,7 +254,7 @@ class MachinaGuard implements GuardContract
     {
         $token = $this->getTokenFromRequest(request());
 
-        return $this->manager->refresh($token)->get();
+        return $this->manager->refresh($token, true)->get();
     }
 
     /**

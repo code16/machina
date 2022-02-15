@@ -47,6 +47,8 @@ class MachinaServiceProvider extends ServiceProvider {
         if ($this->app->runningInConsole()) {
             $this->commands($this->commands);
         }
+        
+        config()->set("jwt.show_black_list_exception", true);
     }
 
     /**
