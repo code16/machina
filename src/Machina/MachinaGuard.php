@@ -9,19 +9,19 @@ use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\Guard as GuardContract;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use Tymon\JWTAuth\Exceptions\InvalidClaimException;
-use Tymon\JWTAuth\Exceptions\JWTException;
-use Tymon\JWTAuth\Exceptions\PayloadException;
-use Tymon\JWTAuth\Exceptions\TokenBlacklistedException;
-use Tymon\JWTAuth\Exceptions\TokenExpiredException;
-use Tymon\JWTAuth\Exceptions\TokenInvalidException;
-use Tymon\JWTAuth\Manager;
-use Tymon\JWTAuth\Token;
+use PHPOpenSourceSaver\JWTAuth\Exceptions\InvalidClaimException;
+use PHPOpenSourceSaver\JWTAuth\Exceptions\JWTException;
+use PHPOpenSourceSaver\JWTAuth\Exceptions\PayloadException;
+use PHPOpenSourceSaver\JWTAuth\Exceptions\TokenBlacklistedException;
+use PHPOpenSourceSaver\JWTAuth\Exceptions\TokenExpiredException;
+use PHPOpenSourceSaver\JWTAuth\Exceptions\TokenInvalidException;
+use PHPOpenSourceSaver\JWTAuth\Manager;
+use PHPOpenSourceSaver\JWTAuth\Token;
 
 class MachinaGuard implements GuardContract
 {
     /**
-     * @var \Tymon\JWTAuth\JWTManager
+     * @var \PHPOpenSourceSaver\JWTAuth\JWTManager
      */
     protected $manager;
 
@@ -118,7 +118,7 @@ class MachinaGuard implements GuardContract
      * @param mixed $subject
      * @param array $customClaims
      *
-     * @return \Tymon\JWTAuth\Payload
+     * @return \PHPOpenSourceSaver\JWTAuth\Payload
      */
     protected function makePayload($subject, array $customClaims = [])
     {
@@ -197,7 +197,7 @@ class MachinaGuard implements GuardContract
      *
      * @param string $query
      *
-     * @return \Tymon\JWTAuth\Token
+     * @return \PHPOpenSourceSaver\JWTAuth\Token
      */
     public function parseToken(Request $request, $method = 'bearer', $header = 'authorization', $query = 'token')
     {
@@ -264,7 +264,7 @@ class MachinaGuard implements GuardContract
      *
      * @param mixed $token
      *
-     * @return \Tymon\JWTAuth\Payload
+     * @return \PHPOpenSourceSaver\JWTAuth\Payload
      */
     protected function getPayload($token)
     {
