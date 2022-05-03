@@ -1,24 +1,14 @@
 {
     "name": "code16/machina",
     "description": "Machine to machine authentication for Laravel",
-    "keywords": ["auth", "laravel", "api", "package"],
-    "homepage": "https://github.com/code16/machina",
-    "authors": [
-        {
-            "name": "Rémi Collin"
-        },
-        {
-            "name": "Philippe Lonchampt",
-            "email": "philippe@code16.fr"
-        }
-    ],
     "require": {
-        "illuminate/support": "5.5.*|5.6.*|5.7.*|5.8.*|^6.0|^7.0|^8.0",
+        "php": "^8.1",
+        "illuminate/support": "^8.0|^9.0",
         "php-open-source-saver/jwt-auth": "^1.4"
     },
     "require-dev": {
-        "phpunit/phpunit": "6.0.*|7.0.*|7.5.*|8.0.*|^8.5|9.0.*",
-        "orchestra/testbench": "3.5.*|3.6.*|3.7.*|3.8.*|4.*|5.*|6.*"
+        "phpunit/phpunit": "^8.5|^9.5",
+        "orchestra/testbench": "6.*|7.*"
     },
     "autoload": {
        "psr-4": {
@@ -38,5 +28,4 @@
         }
     },
     "license": "MIT"
-
 }

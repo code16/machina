@@ -20,19 +20,8 @@ use PHPOpenSourceSaver\JWTAuth\Token;
 
 class MachinaGuard implements GuardContract
 {
-    /** @var Manager */
-    protected $manager;
-
-    protected $clientRepository;
-
-    public function __construct(
-        Manager $manager,
-        ClientRepositoryInterface $clientRepository
-    )
-    {   
-        $this->manager = $manager;
-        $this->clientRepository = $clientRepository;
-    }
+    public function __construct(protected Manager $manager, protected ClientRepositoryInterface $clientRepository)
+    {}
 
     /**
      * Determine if the current user is a guest.
@@ -43,8 +32,7 @@ class MachinaGuard implements GuardContract
     {
         throw new NotImplementedException("");
     }
-
-
+    
     /**
      * Get the ID for the currently authenticated user.
      *
@@ -137,6 +125,16 @@ class MachinaGuard implements GuardContract
     }
 
     /**
+     * Determine if the guard has a user instance.
+     *
+     * @return bool
+     */
+    public function hasUser()
+    {
+        return ! is_null($this->user());
+    }
+
+    /**
      * Get the user for the incoming request.
      *
      * @param  \Illuminate\Http\Request $request
@@ -154,23 +152,14 @@ class MachinaGuard implements GuardContract
         try {
             $client = $this->getClientFromToken($token);
         } 
-        catch (TokenBlacklistedException $e) {
+        catch (TokenBlacklistedException|TokenExpiredException $e) {
             throw new MachinaJwtException($e, 401);
         }
-        catch (TokenExpiredException $e) {
-            throw new MachinaJwtException($e, 401);
-        }
-        catch (TokenInvalidException $e) {
-            throw new MachinaJwtException($e, 400);
-        }
-        catch (PayloadException $e) {
-            throw new MachinaJwtException($e, 400);
-        }
-        catch (InvalidClaimException $e) {
+        catch (TokenInvalidException|PayloadException|InvalidClaimException $e) {
             throw new MachinaJwtException($e, 400);
         }
 
-        return $client ? $client : null;
+        return $client ?? null;
     }
 
     /**
@@ -183,7 +172,7 @@ class MachinaGuard implements GuardContract
     {
         try {
             $token = $this->parseToken($request);
-        } catch (JWTException $e) {
+        } catch (JWTException) {
             return false;
         }
         
@@ -244,7 +233,7 @@ class MachinaGuard implements GuardContract
 
         return $client;
     }
-    
+
     /**
      * Refresh current token & send it back
      * 
@@ -278,5 +267,4 @@ class MachinaGuard implements GuardContract
     {
         return $this->manager->getPayloadFactory()->getTTL();
     }
-
 }
