@@ -29,7 +29,7 @@ jobs:
               laravel: 12.*
               testbench: 10.*
     env: ${{ matrix.env }}
-    name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.stability }} - ${{ matrix.os }}
+    name: P${{ matrix.php }} - L${laravel} - T${testbench}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
