@@ -14,20 +14,20 @@ jobs:
         include:
           - php: 8.4
             env:
-              LARAVEL: 10.*
-              TESTBENCH: 8.*
+              laravel: 10.*
+              testbench: 8.*
           - php: 8.3
             env:
-              LARAVEL: 10.*
-              TESTBENCH: 8.*
+              laravel: 10.*
+              testbench: 8.*
           - php: 8.4
             env:
-              LARAVEL: 11.*
-              TESTBENCH: 9.*
+              laravel: 11.*
+              testbench: 9.*
           - php: 8.4
             env:
-              LARAVEL: 12.*
-              TESTBENCH: 10.*
+              laravel: 12.*
+              testbench: 10.*
     env: ${{ matrix.env }}
     name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.stability }} - ${{ matrix.os }}
     steps:
