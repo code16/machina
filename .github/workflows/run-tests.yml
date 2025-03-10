@@ -1,4 +1,4 @@
-name: run-tests
+name: Tests
 
 on:
   push:
@@ -8,29 +8,28 @@ on:
 
 jobs:
   test:
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
     strategy:
-      fail-fast: true
       matrix:
-        - php: 8.4
-          env:
-            laravel: 10.*
-            testbench: 8.*
-        - php: 8.3
-          env:
-            laravel: 10.*
-            testbench: 8.*
-        - php: 8.4
-          env:
-            laravel: 11.*
-            testbench: 9.*
-        - php: 8.4
-          env:
-            laravel: 12.*
-            testbench: 10.*
-
+        include:
+          - php: 8.4
+            env:
+              LARAVEL: 10.*
+              TESTBENCH: 8.*
+          - php: 8.3
+            env:
+              LARAVEL: 10.*
+              TESTBENCH: 8.*
+          - php: 8.4
+            env:
+              LARAVEL: 11.*
+              TESTBENCH: 9.*
+          - php: 8.4
+            env:
+              LARAVEL: 12.*
+              TESTBENCH: 10.*
+    env: ${{ matrix.env }}
     name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.stability }} - ${{ matrix.os }}
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
