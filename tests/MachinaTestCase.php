@@ -7,9 +7,9 @@ use Code16\Machina\Tests\Stubs\Client;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
-use Orchestra\Testbench\TestCase;
+use Orchestra\Testbench\TestCase as Orchestra;
 
-abstract class MachinaTestCase extends TestCase
+abstract class MachinaTestCase extends Orchestra
 {
     public function setUp(): void
     {
