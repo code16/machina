@@ -12,6 +12,10 @@ jobs:
     strategy:
       matrix:
         include:
+          - php: 8.5
+            env:
+              laravel: 12.*
+              testbench: 10.*
           - php: 8.4
             env:
               laravel: 10.*
@@ -50,6 +54,9 @@ jobs:
         run: |
           composer require "laravel/framework:${laravel}" "orchestra/testbench:${testbench}" --no-interaction --no-update --prefer-dist
           composer update --prefer-stable --prefer-dist --no-interaction
+
+      - name: Run Security Audit
+        run: composer audit
 
       - name: List Installed Dependencies
         run: composer show -D
