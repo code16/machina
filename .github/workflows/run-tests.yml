@@ -12,6 +12,10 @@ jobs:
     strategy:
       matrix:
         include:
+          - php: 8.5
+            env:
+              laravel: 12.*
+              testbench: 10.*
           - php: 8.4
             env:
               laravel: 10.*

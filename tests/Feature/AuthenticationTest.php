@@ -3,6 +3,7 @@
 namespace Code16\Machina\Tests\Feature;
 
 use Code16\Machina\Tests\MachinaTestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class AuthenticationTest extends MachinaTestCase
 {
@@ -15,7 +16,7 @@ class AuthenticationTest extends MachinaTestCase
         })->middleware('auth:machina');
     }
 
-    /** @test */
+    #[Test]
     function client_can_access_a_protected_route_with_a_valid_token_in_header()
     {
         $client = $this->createClient("1234");
@@ -34,7 +35,7 @@ class AuthenticationTest extends MachinaTestCase
         $response->assertStatus(200);
     }
 
-    /** @test */
+    #[Test]
     function client_can_access_a_protected_route_with_a_valid_token_in_url()
     {
         $client = $this->createClient("1234");
@@ -50,14 +51,14 @@ class AuthenticationTest extends MachinaTestCase
         $response->assertStatus(200);
     }
 
-    /** @test */
+    #[Test]
     function accessing_a_protected_route_without_a_token_returns_400()
     {
         $response = $this->json('get', '/protected');
         $response->assertStatus(400);
     }
 
-    /** @test */
+    #[Test]
     function accessing_a_protected_route_with_an_invalid_token_returns_401()
     {
         $headers = [
@@ -67,7 +68,7 @@ class AuthenticationTest extends MachinaTestCase
         $response->assertStatus(400);
     }
 
-    /** @test */
+    #[Test]
     function user_is_authenticated_when_a_protected_route_is_accessed()
     {
         $client = $this->createClient("1234");
@@ -88,7 +89,7 @@ class AuthenticationTest extends MachinaTestCase
         $this->assertEquals($client->id, auth()->user()->id);
     }
 
-    /** @test */
+    #[Test]
     function token_is_not_returned_inside_response_headers_when_not_refreshed_by_middleware()
     {
         $client = $this->createClient("1234");
@@ -108,7 +109,7 @@ class AuthenticationTest extends MachinaTestCase
         $this->assertFalse(array_key_exists("authorization", $response->headers->all()));
     }
 
-    /** @test */
+    #[Test]
     function user_is_set_after_a_successful_authentication()
     {
         $this->app->make('router')->get('user', function() {
