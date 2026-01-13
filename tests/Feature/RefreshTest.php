@@ -4,11 +4,12 @@ namespace Code16\Machina\Tests\Feature;
 
 use Code16\Machina\Middleware\RefreshToken;
 use Code16\Machina\Tests\MachinaTestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class RefreshTest extends MachinaTestCase
 {
 
-    /** @test */
+    #[Test]
     function we_can_refresh_the_token_using_middleware()
     {
         $this->app

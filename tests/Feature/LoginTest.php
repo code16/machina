@@ -3,10 +3,11 @@
 namespace Code16\Machina\Tests\Feature;
 
 use Code16\Machina\Tests\MachinaTestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class LoginTest extends MachinaTestCase
 {
-    /** @test */
+    #[Test]
     function login_with_valid_credentials_returns_a_jwt_token()
     {
         $client = $this->createClient("1234");
@@ -18,7 +19,7 @@ class LoginTest extends MachinaTestCase
         $response->assertStatus(200);
     }
 
-    /** @test */
+    #[Test]
     function login_with_invalid_credentials_returns_a_401()
     {
         $client = $this->createClient("1234");
@@ -28,9 +29,9 @@ class LoginTest extends MachinaTestCase
         ];
         $response = $this->json('post', '/auth/login', $data);
         $response->assertStatus(401);
-    }    
+    }
 
-    /** @test */
+    #[Test]
     function login_with_no_credentials_parameters_returns_a_401()
     {
         $client = $this->createClient("1234");
