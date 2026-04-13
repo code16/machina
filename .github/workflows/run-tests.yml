@@ -33,7 +33,7 @@ jobs:
               laravel: 11.*
               testbench: 9.*
     env: ${{ matrix.env }}
-    name: P${{ matrix.php }} - L${{ matrix.laravel }} - T${{ matrix.testbench }}
+    name: P${{ matrix.php }} - L${laravel} - T${testbench}
     steps:
       - name: Checkout code
         uses: actions/checkout@v6
