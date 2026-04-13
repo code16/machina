@@ -14,6 +14,10 @@ jobs:
         include:
           - php: 8.5
             env:
+              laravel: 13.*
+              testbench: 11.*
+          - php: 8.5
+            env:
               laravel: 12.*
               testbench: 10.*
           - php: 8.4
@@ -36,7 +40,7 @@ jobs:
     name: P${{ matrix.php }} - L${{ matrix.laravel }} - T${{ matrix.testbench }}
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
