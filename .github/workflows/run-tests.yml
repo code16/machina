@@ -22,20 +22,16 @@ jobs:
               testbench: 10.*
           - php: 8.4
             env:
-              laravel: 10.*
-              testbench: 8.*
-          - php: 8.3
-            env:
-              laravel: 10.*
-              testbench: 8.*
-          - php: 8.4
-            env:
               laravel: 11.*
               testbench: 9.*
           - php: 8.4
             env:
               laravel: 12.*
               testbench: 10.*
+          - php: 8.3
+            env:
+              laravel: 11.*
+              testbench: 9.*
     env: ${{ matrix.env }}
     name: P${{ matrix.php }} - L${{ matrix.laravel }} - T${{ matrix.testbench }}
     steps:
